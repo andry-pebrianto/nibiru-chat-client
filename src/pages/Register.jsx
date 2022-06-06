@@ -1,17 +1,17 @@
-import "../assets/styles/auth.css";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { register } from "../redux/actions/auth";
-import { createToast } from "../utils/createToast";
+import '../assets/styles/auth.css';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { register } from '../redux/actions/auth';
+import { createToast } from '../utils/createToast';
 
 export default function Register() {
   const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
+    username: '',
+    email: '',
+    password: '',
   });
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Register() {
     e.preventDefault();
 
     if (!form.username || !form.email || !form.password) {
-      setErrors([{ msg: "All field required (*) must be filled" }]);
+      setErrors([{ msg: 'All field required (*) must be filled' }]);
     } else {
       setErrors([]);
       setIsLoading(true);
@@ -30,10 +30,10 @@ export default function Register() {
       const registerStatus = await register(form, setErrors);
       if (registerStatus) {
         createToast(
-          "Register Success, Please Activate Your Account Through Link From Email",
-          "success"
+          'Register Success, Please Activate Your Account Through Link From Email',
+          'success',
         );
-        navigate("/login");
+        navigate('/login');
       }
 
       setIsLoading(false);
@@ -108,12 +108,14 @@ export default function Register() {
             <button
               className="btn bg-blue w-100 text-white p-3 rounded-pill"
               disabled
+              type="button"
             >
               <span
                 className="spinner-border spinner-border-sm"
                 role="status"
                 aria-hidden="true"
-              />{" "}
+              />
+              {' '}
               Loading...
             </button>
           ) : (
@@ -127,23 +129,25 @@ export default function Register() {
         </form>
         <div className="row title-bottom">
           <div className="col-4">
-            <div className="line"></div>
+            <div className="line" />
           </div>
           <div
             className="col-4 text-secondary text-center"
-            style={{ marginTop: "-10px" }}
+            style={{ marginTop: '-10px' }}
           >
             Register With
           </div>
           <div className="col-4">
-            <div className="line"></div>
+            <div className="line" />
           </div>
         </div>
-        <button className="btn w-100 btn-google p-3 rounded-pill">
+        <button type="button" className="btn w-100 btn-google p-3 rounded-pill">
           Google
         </button>
         <p className="text-center mt-4">
-          Don't have an account? <Link to="/login">Login</Link>
+          Don&lsquo;t have an account?
+          {' '}
+          <Link to="/login">Login</Link>
         </p>
       </div>
     </div>

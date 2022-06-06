@@ -5,6 +5,7 @@ import {
   GET_DETAIL_USER_FAILED,
 } from './types';
 
+// eslint-disable-next-line consistent-return
 export const getDetailUser = (id, navigate) => async (dispatch) => {
   const token = localStorage.getItem('token');
 
