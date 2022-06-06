@@ -60,7 +60,7 @@ export default function Login() {
         <form onSubmit={submitHandler}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label text-secondary">
-              <small>Email</small>
+              <small>* Email</small>
             </label>
             <input
               type="email"
@@ -73,7 +73,7 @@ export default function Login() {
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label text-secondary">
-              <small>Password</small>
+              <small>* Password</small>
             </label>
             <input
               type="password"
@@ -125,6 +125,9 @@ export default function Login() {
         <button className="btn w-100 btn-google p-3 rounded-pill">
           Google
         </button>
+        <p className="text-center mt-4">
+          Don't have an account? <Link to="/register">Sign Up</Link>
+        </p>
       </div>
     </div>
   );
