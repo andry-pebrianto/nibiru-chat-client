@@ -2,6 +2,7 @@ import '../assets/styles/home.css';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ListUser from '../components/ListUser';
+import Profile from '../components/Profile';
 import Chat from '../components/Chat';
 
 export default function Home() {
@@ -23,7 +24,7 @@ export default function Home() {
     <div className="container-fluid">
       <div className="row">
         {
-          tab === 'profile' ? <h1>Asw</h1> : <ListUser setTab={setTab} />
+          tab === 'profile' ? <Profile /> : <ListUser setTab={setTab} />
         }
         <Chat />
       </div>

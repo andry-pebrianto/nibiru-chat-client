@@ -76,3 +76,27 @@ export const getListUser = (search, navigate) => async (dispatch) => {
     });
   }
 };
+
+export const editProfile = async (data, setErrors) => {
+  try {
+    const id = localStorage.getItem('id');
+    const token = localStorage.getItem('token');
+    await axios.put(`${process.env.REACT_APP_API_URL}/user/${id}`, data, {
+      headers: { token },
+    });
+
+    return true;
+  } catch (error) {
+    if (error.response) {
+      if (Array.isArray(error.response.data.error)) {
+        setErrors(error.response.data.error);
+      } else {
+        setErrors([{ msg: error.response.data.error }]);
+      }
+    } else {
+      setErrors([{ msg: error.message }]);
+    }
+
+    return false;
+  }
+};

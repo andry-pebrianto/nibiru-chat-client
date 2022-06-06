@@ -15,8 +15,6 @@ export default function ListUser() {
 
   useEffect(() => {
     dispatch(getListUser(search, navigate));
-
-    return 0;
   }, []);
 
   const submitSearch = (e) => {

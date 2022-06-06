@@ -23,3 +23,12 @@ a {
 .profile-rounded {
   border-radius: 16px;
 }
+
+.back-icon {
+  position: absolute;
+  left: -5px;
+}
+
+.back-icon:hover {
+  cursor: pointer;
+}

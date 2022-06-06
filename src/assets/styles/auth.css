@@ -38,12 +38,3 @@ body {
   margin-top: 40px;
   margin-bottom: 40px;
 }
-
-.back-icon {
-  position: absolute;
-  left: -5px;
-}
-
-.back-icon:hover {
-  cursor: pointer;
-}
