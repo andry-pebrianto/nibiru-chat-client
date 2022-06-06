@@ -41,7 +41,6 @@ export default function Home() {
         receiver === response[0].sender_id
           || receiver === response[0].receiver_id
       ) {
-        console.log('asw');
         setListChat(response);
       }
     });
