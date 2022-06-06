@@ -7,7 +7,8 @@ import { MdLogout } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
 import { getListUser } from '../redux/actions/user';
 
-export default function ListUser() {
+// eslint-disable-next-line react/prop-types
+export default function ListUser({ selectReceiver }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { listUser } = useSelector((state) => state);
@@ -113,23 +114,28 @@ export default function ListUser() {
                     {listUser.data.map((user) => (
                       <div key={user.id}>
                         {user.id !== localStorage.getItem('id') && (
-                        <button type="button" className="btn text-dark">
+                        <button onClick={() => selectReceiver(user.id)} type="button" className="btn text-dark w-100">
                           <div className="user-item">
-                            {user.photo ? (
-                              <img
-                                className="profile-rounded"
-                                src={`https://drive.google.com/uc?export=view&id=${user.photo}`}
-                                alt="Gambar Profile"
-                              />
-                            ) : (
-                              <img
-                                className="profile-rounded"
-                                src="https://images227.netlify.app/mernuas/default.jpg"
-                                alt="Gambar Profile"
-                              />
-                            )}
-                            <div className="w-100 mx-3">
-                              <p className="fw-bold">{user.username}</p>
+                            <div className="row">
+                              <div className="col-4">
+                                {user.photo ? (
+                                  <img
+                                    className="profile-rounded"
+                                    src={`https://drive.google.com/uc?export=view&id=${user.photo}`}
+                                    alt="Gambar Profile"
+                                  />
+                                ) : (
+                                  <img
+                                    className="profile-rounded"
+                                    src="https://images227.netlify.app/mernuas/default.jpg"
+                                    alt="Gambar Profile"
+                                  />
+                                )}
+                              </div>
+                              <div className="col-8 text-start">
+                                <p className="fw-bold p-0 m-0">{user.username.split(' ')[0]}</p>
+                                <p><small className="color-blue">Lorem ipsum dolor.</small></p>
+                              </div>
                             </div>
                             <small className="text-end">12.20</small>
                           </div>
