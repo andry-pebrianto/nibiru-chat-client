@@ -36,12 +36,12 @@ export default function Chat({
               </div>
             </div>
           </div>
-          <div className="chat-menu-message p-4">
+          <div className="chat-menu-message p-4" id="chatMenuMessage">
             {
               listChat.map((chat) => (
                 <div key={chat.id}>
                   {chat.sender_id === localStorage.getItem('id') ? (
-                    <div className="d-flex justify-content-end align-items-end mb-4">
+                    <div className="d-flex justify-content-end align-items-end mt-4">
                       <div className="ballon-right me-2">
                         {chat.chat}
                       </div>
@@ -60,7 +60,7 @@ export default function Chat({
                       )}
                     </div>
                   ) : (
-                    <div className="d-flex justify-content-start align-items-end mb-4">
+                    <div className="d-flex justify-content-start align-items-end mt-4">
                       {chat.photo ? (
                         <img
                           className="profile-rounded"
@@ -92,6 +92,7 @@ export default function Chat({
                   placeholder="Type your message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
+                  required
                 />
                 <button type="submit" className="btn text-white bg-blue">
                   Send
