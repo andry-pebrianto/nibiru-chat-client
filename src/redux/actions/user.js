@@ -1,11 +1,14 @@
+/* eslint-disable consistent-return */
 import axios from 'axios';
 import {
   GET_DETAIL_USER_PENDING,
   GET_DETAIL_USER_SUCCESS,
   GET_DETAIL_USER_FAILED,
+  GET_LIST_USER_PENDING,
+  GET_LIST_USER_SUCCESS,
+  GET_LIST_USER_FAILED,
 } from './types';
 
-// eslint-disable-next-line consistent-return
 export const getDetailUser = (id, navigate) => async (dispatch) => {
   const token = localStorage.getItem('token');
 
@@ -27,7 +30,7 @@ export const getDetailUser = (id, navigate) => async (dispatch) => {
     if (error.response) {
       if (parseInt(error.response.data.code, 10) === 401) {
         localStorage.clear();
-        return navigate('/auth');
+        return navigate('/login');
       }
 
       error.message = error.response.data.error;
@@ -35,6 +38,40 @@ export const getDetailUser = (id, navigate) => async (dispatch) => {
 
     dispatch({
       type: GET_DETAIL_USER_FAILED,
+      payload: error.message,
+    });
+  }
+};
+
+export const getListUser = (search, navigate) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+
+  try {
+    dispatch({
+      type: GET_LIST_USER_PENDING,
+      payload: null,
+    });
+
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/user?search=${search}`, {
+      headers: { token },
+    });
+
+    dispatch({
+      type: GET_LIST_USER_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      if (parseInt(error.response.data.code, 10) === 401) {
+        localStorage.clear();
+        return navigate('/login');
+      }
+
+      error.message = error.response.data.error;
+    }
+
+    dispatch({
+      type: GET_LIST_USER_FAILED,
       payload: error.message,
     });
   }

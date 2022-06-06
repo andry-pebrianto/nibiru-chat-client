@@ -1,28 +1,28 @@
 import {
-  GET_DETAIL_USER_PENDING,
-  GET_DETAIL_USER_SUCCESS,
-  GET_DETAIL_USER_FAILED,
+  GET_LIST_USER_PENDING,
+  GET_LIST_USER_SUCCESS,
+  GET_LIST_USER_FAILED,
 } from '../actions/types';
 
 const initialState = {
   isLoading: false,
   isError: false,
-  data: {},
+  data: [],
   error: null,
 };
 
-const detailUserReducer = (state = initialState, action) => {
+const detailRecipeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_DETAIL_USER_PENDING:
+    case GET_LIST_USER_PENDING:
       return { ...state, isLoading: true };
-    case GET_DETAIL_USER_SUCCESS:
+    case GET_LIST_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isError: false,
         data: action.payload.data,
       };
-    case GET_DETAIL_USER_FAILED:
+    case GET_LIST_USER_FAILED:
       return {
         ...state,
         isLoading: false,
@@ -34,4 +34,4 @@ const detailUserReducer = (state = initialState, action) => {
   }
 };
 
-export default detailUserReducer;
+export default detailRecipeReducer;
