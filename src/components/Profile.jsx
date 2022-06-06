@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from 'react-icons/io';
-import { editProfile, getDetailUser } from '../redux/actions/user';
+import { FaRegEdit } from 'react-icons/fa';
+import { editProfile, editPhoto, getDetailUser } from '../redux/actions/user';
 import { createToast } from '../utils/createToast';
 
 export default function Profile() {
@@ -17,6 +18,7 @@ export default function Profile() {
     phone: detailUser.data.phone ? detailUser.data.phone : '',
     bio: detailUser.data.bio ? detailUser.data.bio : '',
   });
+  const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
     const id = localStorage.getItem('id');
@@ -28,6 +30,10 @@ export default function Profile() {
       ...form,
       [e.target.id]: e.target.value,
     });
+  };
+
+  const photoChangeHandler = (e) => {
+    setPhoto(e.target.files[0]);
   };
 
   const onSubmitHandler = async (e) => {
@@ -50,6 +56,27 @@ export default function Profile() {
     }
   };
 
+  const onSubmitPhoto = async () => {
+    document.getElementById('close').click();
+
+    const formData = new FormData();
+    if (photo) {
+      formData.append('photo', photo);
+    }
+
+    setErrors([]);
+    setIsLoading(true);
+
+    const editPhotoStatus = await editPhoto(formData, setErrors);
+    if (editPhotoStatus) {
+      createToast('Edit Photo Success', 'success');
+      const id = localStorage.getItem('id');
+      dispatch(getDetailUser(id, navigate));
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <div className="left-menu col-3 p-4">
       <Link to="/">
@@ -60,30 +87,90 @@ export default function Profile() {
         </div>
       </Link>
       <div className="profile mt-4 profile">
-        {detailUser.data.photo ? (
-          <img
-            className="profile-rounded"
-            src={`https://drive.google.com/uc?export=view&id=${detailUser.data.photo}`}
-            alt="Gambar Profile"
-          />
-        ) : (
-          <img
-            className="profile-rounded"
-            src="https://images227.netlify.app/mernuas/default.jpg"
-            alt="Gambar Profile"
-          />
-        )}
+        <div className="position-relative">
+          {detailUser.data.photo ? (
+            <img
+              className="profile-rounded"
+              src={`https://drive.google.com/uc?export=view&id=${detailUser.data.photo}`}
+              alt="Gambar Profile"
+            />
+          ) : (
+            <img
+              className="profile-rounded"
+              src="https://images227.netlify.app/mernuas/default.jpg"
+              alt="Gambar Profile"
+            />
+          )}
+          <div
+            className="edit-icon position-absolute"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#editPhoto"
+          >
+            <FaRegEdit />
+          </div>
+        </div>
+
+        <div
+          className="modal fade"
+          id="editPhoto"
+          tabIndex="-1"
+          aria-labelledby="editPhotoLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="editPhotoLabel">
+                  Change Photo Profile
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                />
+              </div>
+              <div className="modal-body">
+                <form>
+                  <input
+                    type="file"
+                    className="form-control"
+                    onChange={photoChangeHandler}
+                  />
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  id="close"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  onClick={onSubmitPhoto}
+                  className="btn bg-blue text-white"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         <h5 className="fw-bold mt-3">{detailUser.data.username}</h5>
       </div>
       <br />
       {errors.length > 0 && (
-      <div className="alert alert-danger mx-0 py-2">
-        <ul className="m-0">
-          {errors.map((error, index) => (
-            <li key={index}>{error.msg}</li>
-          ))}
-        </ul>
-      </div>
+        <div className="alert alert-danger mx-0 py-2">
+          <ul className="m-0">
+            {errors.map((error, index) => (
+              <li key={index}>{error.msg}</li>
+            ))}
+          </ul>
+        </div>
       )}
       <form onSubmit={onSubmitHandler}>
         <div className="mb-4">
@@ -150,7 +237,12 @@ export default function Profile() {
             Loading...
           </button>
         ) : (
-          <button className="btn bg-blue text-light p-2 w-100 mb-4" type="submit">Update</button>
+          <button
+            className="btn bg-blue text-light p-2 w-100 mb-4"
+            type="submit"
+          >
+            Update
+          </button>
         )}
       </form>
     </div>
