@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { BsSearch } from 'react-icons/bs';
+import { MdLogout } from 'react-icons/md';
+import { AiOutlineUser } from 'react-icons/ai';
 import { getListUser } from '../redux/actions/user';
 
 export default function ListUser() {
@@ -22,6 +25,25 @@ export default function ListUser() {
     dispatch(getListUser(search, navigate));
   };
 
+  const logout = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will be Logout!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Logout!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        return navigate('/login');
+      }
+
+      return 0;
+    });
+  };
+
   return (
     <div className="left-menu col-3 p-4">
       <div className="d-flex justify-content-between">
@@ -40,16 +62,26 @@ export default function ListUser() {
           <ul className="dropdown-menu mt-2" aria-labelledby="dropdownMenuLink">
             <li>
               <Link to="?tab=profile" type="button" className="dropdown-item my-3 text-white">
-                Profile
+                <div className="d-flex">
+                  <h5><AiOutlineUser /></h5>
+                  <p className="ms-2 mt-1 p-0 m-0">
+                    Profile
+                  </p>
+                </div>
               </Link>
             </li>
             <li>
               <button
                 type="button"
                 className="dropdown-item my-3 text-white"
-                href="#"
+                onClick={logout}
               >
-                Logout
+                <div className="d-flex">
+                  <h5><MdLogout /></h5>
+                  <p className="ms-2 mt-1 p-0 m-0">
+                    Logout
+                  </p>
+                </div>
               </button>
             </li>
           </ul>
