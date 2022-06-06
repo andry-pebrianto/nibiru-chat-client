@@ -4,6 +4,10 @@
   font-family: 'Rubik', sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .color-blue {
   color: #7E98DF;
 }
@@ -14,4 +18,8 @@
 
 .bg-blue:hover {
   background-color: #587ad8;
+}
+
+.profile-rounded {
+  border-radius: 16px;
 }

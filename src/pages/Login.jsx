@@ -15,6 +15,7 @@ export default function Login() {
 
   useEffect(() => {
     document.title = `${process.env.REACT_APP_APP_NAME} - Login`;
+    window.scrollTo(0, 0);
   }, []);
 
   const submitHandler = async (e) => {
@@ -85,7 +86,7 @@ export default function Login() {
             />
           </div>
           <div className="d-flex justify-content-end mb-4">
-            <Link to="/forgot">Forgot Password</Link>
+            <Link to="/">Forgot Password</Link>
           </div>
           {isLoading ? (
             <button

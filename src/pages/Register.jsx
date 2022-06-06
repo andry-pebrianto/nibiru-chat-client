@@ -1,6 +1,7 @@
 import '../assets/styles/auth.css';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { IoIosArrowBack } from 'react-icons/io';
 import { register } from '../redux/actions/auth';
 import { createToast } from '../utils/createToast';
 
@@ -16,6 +17,7 @@ export default function Register() {
 
   useEffect(() => {
     document.title = `${process.env.REACT_APP_APP_NAME} - Register`;
+    window.scrollTo(0, 0);
   }, []);
 
   const submitHandler = async (e) => {
@@ -50,7 +52,16 @@ export default function Register() {
   return (
     <div className="container">
       <div className="auth mx-auto">
-        <h3 className="color-blue text-center mb-4">Register</h3>
+        <h3 className="color-blue text-center mb-4 position-relative">
+          <Link to="/">
+            <div className="back-icon color-blue">
+              <h3>
+                <IoIosArrowBack />
+              </h3>
+            </div>
+          </Link>
+          Register
+        </h3>
         <p>Hi, Welcome back!</p>
         {errors.length > 0 && (
           <div className="alert alert-danger mx-0 py-2">
@@ -88,7 +99,7 @@ export default function Register() {
               value={form.email}
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-5">
             <label htmlFor="password" className="form-label text-secondary">
               <small>* Password</small>
             </label>
@@ -100,9 +111,6 @@ export default function Register() {
               onChange={inputChangeHandler}
               value={form.password}
             />
-          </div>
-          <div className="d-flex justify-content-end mb-4">
-            <Link to="/forgot">Forgot Password</Link>
           </div>
           {isLoading ? (
             <button
@@ -144,11 +152,6 @@ export default function Register() {
         <button type="button" className="btn w-100 btn-google p-3 rounded-pill">
           Google
         </button>
-        <p className="text-center mt-4">
-          Don&lsquo;t have an account?
-          {' '}
-          <Link to="/login">Login</Link>
-        </p>
       </div>
     </div>
   );
