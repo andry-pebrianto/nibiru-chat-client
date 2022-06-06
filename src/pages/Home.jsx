@@ -35,12 +35,13 @@ export default function Home() {
   useEffect(() => {
     const socket = io(process.env.REACT_APP_API_URL);
     socket.on('send-message-response', (response) => {
-      const receiver = detailReceiver.data.id;
+      const receiver = activeReceiver;
 
       if (
         receiver === response[0].sender_id
           || receiver === response[0].receiver_id
       ) {
+        console.log('asw');
         setListChat(response);
       }
     });
@@ -68,7 +69,7 @@ export default function Home() {
 
     const data = {
       sender: localStorage.getItem('id'),
-      receiver: detailReceiver.data.id,
+      receiver: activeReceiver,
       date: new Date(),
       chat: message,
     };
@@ -76,7 +77,7 @@ export default function Home() {
 
     const payload = {
       sender_id: localStorage.getItem('id'),
-      receiver_id: detailReceiver.data.id,
+      receiver_id: activeReceiver,
       photo: detailUser.data.photo,
       date: new Date(),
       chat: message,
@@ -90,6 +91,9 @@ export default function Home() {
       elem.scrollTop = elem.scrollHeight;
     }, 100);
   };
+
+  console.log(listChat);
+  console.log(activeReceiver);
 
   return (
     <div className="container-fluid">
