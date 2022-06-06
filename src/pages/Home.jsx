@@ -43,6 +43,11 @@ export default function Home() {
             || receiver === response[0].receiver_id
         ) {
           setListChat(response);
+
+          setTimeout(() => {
+            const elem = document.getElementById('chatMenuMessage');
+            elem.scrollTop = elem.scrollHeight;
+          }, 1000);
         }
       }
     });
@@ -59,11 +64,6 @@ export default function Home() {
       sender: localStorage.getItem('id'),
       receiver: receiverId,
     });
-
-    setTimeout(() => {
-      const elem = document.getElementById('chatMenuMessage');
-      elem.scrollTop = elem.scrollHeight;
-    }, 100);
   };
 
   const onSendMessage = (e) => {
