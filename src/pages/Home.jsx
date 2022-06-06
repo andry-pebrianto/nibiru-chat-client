@@ -37,13 +37,11 @@ export default function Home() {
     socket.on('send-message-response', (response) => {
       const receiver = detailReceiver.data.id;
 
-      if (response.length) {
-        if (
-          receiver === response[0].sender_id
+      if (
+        receiver === response[0].sender_id
           || receiver === response[0].receiver_id
-        ) {
-          setListChat(response);
-        }
+      ) {
+        setListChat(response);
       }
     });
     setSocketio(socket);
