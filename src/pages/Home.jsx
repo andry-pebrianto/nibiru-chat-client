@@ -35,13 +35,15 @@ export default function Home() {
   useEffect(() => {
     const socket = io(process.env.REACT_APP_API_URL);
     socket.on('send-message-response', (response) => {
-      const receiver = activeReceiver;
+      const receiver = localStorage.getItem('receiver');
 
-      if (
-        receiver === response[0].sender_id
-          || receiver === response[0].receiver_id
-      ) {
-        setListChat(response);
+      if (response.length) {
+        if (
+          receiver === response[0].sender_id
+            || receiver === response[0].receiver_id
+        ) {
+          setListChat(response);
+        }
       }
     });
     setSocketio(socket);
@@ -51,6 +53,7 @@ export default function Home() {
     setListChat([]);
     dispatch(getDetailReceiver(receiverId, navigate));
     setActiveReceiver(receiverId);
+    localStorage.setItem('receiver', receiverId);
     socketio.emit('join-room', localStorage.getItem('id'));
     socketio.emit('chat-history', {
       sender: localStorage.getItem('id'),
@@ -90,9 +93,6 @@ export default function Home() {
       elem.scrollTop = elem.scrollHeight;
     }, 100);
   };
-
-  console.log(listChat);
-  console.log(activeReceiver);
 
   return (
     <div className="container-fluid">
