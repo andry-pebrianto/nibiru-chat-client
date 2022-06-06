@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import moment from 'moment';
 
 export default function Chat({
   activeReceiver,
@@ -43,7 +44,8 @@ export default function Chat({
                   {chat.sender_id === localStorage.getItem('id') ? (
                     <div className="d-flex justify-content-end align-items-end mt-4">
                       <div className="ballon-right me-2">
-                        {chat.chat}
+                        <p className="p-0 m-0">{chat.chat}</p>
+                        <small className="text-secondary" style={{ fontSize: '13px' }}>{moment(chat.date).format('LLL')}</small>
                       </div>
                       {chat.photo ? (
                         <img
@@ -75,7 +77,8 @@ export default function Chat({
                         />
                       )}
                       <div className="ballon-left ms-2">
-                        {chat.chat}
+                        <p className="p-0 m-0">{chat.chat}</p>
+                        <small className="text-light" style={{ fontSize: '13px' }}>{moment(chat.date).format('LLL')}</small>
                       </div>
                     </div>
                   )}
