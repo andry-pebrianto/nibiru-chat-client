@@ -13,6 +13,7 @@ export default function Profile() {
 
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [form, setForm] = useState({
     username: detailUser.data.username ? detailUser.data.username : '',
     phone: detailUser.data.phone ? detailUser.data.phone : '',
@@ -65,16 +66,15 @@ export default function Profile() {
     }
 
     setErrors([]);
-    setIsLoading(true);
+    setPhotoIsLoading(true);
 
     const editPhotoStatus = await editPhoto(formData, setErrors);
     if (editPhotoStatus) {
       createToast('Edit Photo Success', 'success');
       const id = localStorage.getItem('id');
-      dispatch(getDetailUser(id, navigate));
+      dispatch(getDetailUser(id, navigate, setPhotoIsLoading));
+      setPhoto(null);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -88,19 +88,32 @@ export default function Profile() {
       </Link>
       <div className="profile mt-4 profile">
         <div className="position-relative">
-          {detailUser.data.photo ? (
-            <img
-              className="profile-rounded"
-              src={`https://drive.google.com/uc?export=view&id=${detailUser.data.photo}`}
-              alt="Gambar Profile"
-            />
-          ) : (
-            <img
-              className="profile-rounded"
-              src="https://images227.netlify.app/mernuas/default.jpg"
-              alt="Gambar Profile"
-            />
-          )}
+          {
+            photoIsLoading ? (
+              <div className="p-3">
+                <div className="spinner-grow" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            )
+              : (
+                <>
+                  {detailUser.data.photo ? (
+                    <img
+                      className="profile-rounded"
+                      src={`https://drive.google.com/uc?export=view&id=${detailUser.data.photo}`}
+                      alt="Gambar Profile"
+                    />
+                  ) : (
+                    <img
+                      className="profile-rounded"
+                      src="https://images227.netlify.app/mernuas/default.jpg"
+                      alt="Gambar Profile"
+                    />
+                  )}
+                </>
+              )
+          }
           <div
             className="edit-icon position-absolute"
             type="button"

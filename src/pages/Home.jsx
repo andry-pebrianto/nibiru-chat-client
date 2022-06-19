@@ -56,7 +56,7 @@ export default function Home() {
 
   const selectReceiver = (receiverId) => {
     setListChat([]);
-    dispatch(getDetailReceiver(receiverId, navigate));
+    dispatch(getDetailReceiver(receiverId));
     setActiveReceiver(receiverId);
     localStorage.setItem('receiver', receiverId);
     socketio.emit('join-room', localStorage.getItem('id'));

@@ -12,7 +12,7 @@ import {
   GET_DETAIL_RECEIVER_FAILED,
 } from './types';
 
-export const getDetailUser = (id, navigate) => async (dispatch) => {
+export const getDetailUser = (id, navigate, setPhotoIsLoading) => async (dispatch) => {
   const token = localStorage.getItem('token');
 
   try {
@@ -29,6 +29,8 @@ export const getDetailUser = (id, navigate) => async (dispatch) => {
       type: GET_DETAIL_USER_SUCCESS,
       payload: res.data,
     });
+
+    setPhotoIsLoading(false);
   } catch (error) {
     if (error.response) {
       if (parseInt(error.response.data.code, 10) === 401) {
