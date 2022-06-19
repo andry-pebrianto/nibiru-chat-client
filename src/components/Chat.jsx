@@ -16,75 +16,107 @@ export default function Chat({
         <div className="chat-menu col-8 col-md-9 p-0 m-0 d-flex flex-column justify-content-between">
           <div className="chat-menu-header bg-white py-3 px-5">
             <div className="d-flex">
-              {detailReceiver.data.photo ? (
-                <img
-                  className="profile-rounded"
-                  src={`https://drive.google.com/uc?export=view&id=${detailReceiver.data.photo}`}
-                  alt="Gambar Profile"
-                />
+              {detailReceiver.isLoading ? (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
               ) : (
-                <img
-                  className="profile-rounded"
-                  src="https://images227.netlify.app/mernuas/default.jpg"
-                  alt="Gambar Profile"
-                />
+                <>
+                  {detailReceiver.data.photo ? (
+                    <img
+                      className="profile-rounded"
+                      src={`https://drive.google.com/uc?export=view&id=${detailReceiver.data.photo}`}
+                      alt="Gambar Profile"
+                    />
+                  ) : (
+                    <img
+                      className="profile-rounded"
+                      src="https://images227.netlify.app/mernuas/default.jpg"
+                      alt="Gambar Profile"
+                    />
+                  )}
+                  <div className="ms-3">
+                    <p className="fw-bold m-0 p-0">
+                      {detailReceiver.data.username}
+                    </p>
+                    <p className="fw-bold color-blue m-0 p-0">
+                      <small>Online</small>
+                    </p>
+                  </div>
+                </>
               )}
-              <div className="ms-3">
-                <p className="fw-bold m-0 p-0">{detailReceiver.data.username}</p>
-                <p className="fw-bold color-blue m-0 p-0">
-                  <small>Online</small>
-                </p>
-              </div>
             </div>
           </div>
           <div className="chat-menu-message p-4" id="chatMenuMessage">
-            {
-              listChat.map((chat) => (
-                <div key={chat.id}>
-                  {chat.sender_id === localStorage.getItem('id') ? (
-                    <div className="d-flex justify-content-end align-items-end mt-4">
-                      <div className="ballon-right me-2">
-                        <p className="p-0 m-0">{chat.chat}</p>
-                        <small className="text-secondary" style={{ fontSize: '13px' }}>{moment(chat.date).format('LLL')}</small>
+            {detailReceiver.isLoading ? (
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              <>
+                {listChat.length ? (
+                  <>
+                    {listChat.map((chat) => (
+                      <div key={chat.id}>
+                        {chat.sender_id === localStorage.getItem('id') ? (
+                          <div className="d-flex justify-content-end align-items-end mt-4">
+                            <div className="ballon-right me-2">
+                              <p className="p-0 m-0">{chat.chat}</p>
+                              <small
+                                className="text-secondary"
+                                style={{ fontSize: '13px' }}
+                              >
+                                {moment(chat.date).format('LLL')}
+                              </small>
+                            </div>
+                            {chat.photo ? (
+                              <img
+                                className="profile-rounded"
+                                src={`https://drive.google.com/uc?export=view&id=${chat.photo}`}
+                                alt="Gambar Profile"
+                              />
+                            ) : (
+                              <img
+                                className="profile-rounded"
+                                src="https://images227.netlify.app/mernuas/default.jpg"
+                                alt="Gambar Profile"
+                              />
+                            )}
+                          </div>
+                        ) : (
+                          <div className="d-flex justify-content-start align-items-end mt-4">
+                            {chat.photo ? (
+                              <img
+                                className="profile-rounded"
+                                src={`https://drive.google.com/uc?export=view&id=${chat.photo}`}
+                                alt="Gambar Profile"
+                              />
+                            ) : (
+                              <img
+                                className="profile-rounded"
+                                src="https://images227.netlify.app/mernuas/default.jpg"
+                                alt="Gambar Profile"
+                              />
+                            )}
+                            <div className="ballon-left ms-2">
+                              <p className="p-0 m-0">{chat.chat}</p>
+                              <small
+                                className="text-light"
+                                style={{ fontSize: '13px' }}
+                              >
+                                {moment(chat.date).format('LLL')}
+                              </small>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      {chat.photo ? (
-                        <img
-                          className="profile-rounded"
-                          src={`https://drive.google.com/uc?export=view&id=${chat.photo}`}
-                          alt="Gambar Profile"
-                        />
-                      ) : (
-                        <img
-                          className="profile-rounded"
-                          src="https://images227.netlify.app/mernuas/default.jpg"
-                          alt="Gambar Profile"
-                        />
-                      )}
-                    </div>
-                  ) : (
-                    <div className="d-flex justify-content-start align-items-end mt-4">
-                      {chat.photo ? (
-                        <img
-                          className="profile-rounded"
-                          src={`https://drive.google.com/uc?export=view&id=${chat.photo}`}
-                          alt="Gambar Profile"
-                        />
-                      ) : (
-                        <img
-                          className="profile-rounded"
-                          src="https://images227.netlify.app/mernuas/default.jpg"
-                          alt="Gambar Profile"
-                        />
-                      )}
-                      <div className="ballon-left ms-2">
-                        <p className="p-0 m-0">{chat.chat}</p>
-                        <small className="text-light" style={{ fontSize: '13px' }}>{moment(chat.date).format('LLL')}</small>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))
-            }
+                    ))}
+                  </>
+                ) : (
+                  <p className="fs-5">No message yet</p>
+                )}
+              </>
+            )}
           </div>
           <div className="chat-menu-form bg-white py-3 px-5">
             <form onSubmit={onSendMessage}>

@@ -47,7 +47,7 @@ export default function Home() {
           setTimeout(() => {
             const elem = document.getElementById('chatMenuMessage');
             elem.scrollTop = elem.scrollHeight;
-          }, 1000);
+          }, 500);
         }
       }
     });
