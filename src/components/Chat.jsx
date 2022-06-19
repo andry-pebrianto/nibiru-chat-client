@@ -253,7 +253,7 @@ export default function Chat({
           </div>
         </div>
       ) : (
-        <div className="chat-menu col-9 d-flex flex-column">
+        <div className="chat-menu col-8 col-md-9 d-flex flex-column">
           <div className="chat-menu-blank p-4">
             <h5 className="text-secondary">
               Please select a chat to start messaging
