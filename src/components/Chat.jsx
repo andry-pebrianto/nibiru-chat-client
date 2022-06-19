@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
@@ -12,11 +12,14 @@ export default function Chat({
   message,
   setMessage,
   onDeleteMessage,
+  onEditMessage,
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
+  const [editChat, setEditChat] = useState('');
+  const [editChatData, setEditChatData] = useState(null);
 
   return (
     <>
@@ -158,9 +161,35 @@ export default function Chat({
                                 className="d-flex justify-content-end w-100"
                                 style={{ marginTop: '-12px' }}
                               >
-                                <span className="text-primary pointer mt-3 me-2">
+                                <span
+                                  className="text-primary pointer mt-3 me-2"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#editChat"
+                                  onClick={() => {
+                                    setEditChat(chat.chat);
+                                    setEditChatData(chat);
+                                  }}
+                                >
                                   Edit
                                 </span>
+
+                                <div className="modal fade" id="editChat" tabIndex="-1" aria-labelledby="editChatLabel" aria-hidden="true">
+                                  <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                      <div className="modal-header">
+                                        <h5 className="modal-title" id="editChatLabel">Edit Chat</h5>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                                      </div>
+                                      <div className="modal-body">
+                                        <input className="form-control" type="text" value={editChat} onChange={(e) => setEditChat(e.target.value)} />
+                                      </div>
+                                      <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
+                                        <button type="button" className="btn bg-blue text-white" onClick={() => onEditMessage(editChat, editChatData)}>Save changes</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                                 <span
                                   className="text-danger pointer mt-3"
                                   onClick={() => onDeleteMessage(chat)}
@@ -215,7 +244,6 @@ export default function Chat({
                   placeholder="Type your message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  required
                 />
                 <button type="submit" className="btn text-white bg-blue">
                   Send

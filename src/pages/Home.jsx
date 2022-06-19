@@ -70,6 +70,15 @@ export default function Home() {
   const onSendMessage = (e) => {
     e.preventDefault();
 
+    if (!message) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Message empty!',
+      });
+      return;
+    }
+
     const data = {
       sender: localStorage.getItem('id'),
       receiver: activeReceiver,
@@ -84,8 +93,13 @@ export default function Home() {
       photo: detailUser.data.photo,
       date: new Date(),
       chat: message,
+      id: new Date(),
     };
     setListChat([...listChat, payload]);
+    socketio.emit('chat-history', {
+      sender: localStorage.getItem('id'),
+      receiver: activeReceiver,
+    });
 
     setMessage('');
 
@@ -116,6 +130,27 @@ export default function Home() {
     });
   };
 
+  const onEditMessage = (newChat, chat) => {
+    if (!newChat) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Message empty!',
+      });
+      return;
+    }
+
+    const data = {
+      sender: chat.sender_id,
+      receiver: chat.receiver_id,
+      chatId: chat.id,
+      chat: newChat,
+    };
+    socketio.emit('edit-message', data);
+
+    document.getElementById('close').click();
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -132,6 +167,7 @@ export default function Home() {
           setMessage={setMessage}
           onSendMessage={onSendMessage}
           onDeleteMessage={onDeleteMessage}
+          onEditMessage={onEditMessage}
         />
       </div>
     </div>
