@@ -9,6 +9,7 @@ export default function Chat({
   onSendMessage,
   message,
   setMessage,
+  onDeleteMessage,
 }) {
   return (
     <>
@@ -59,29 +60,52 @@ export default function Chat({
                     {listChat.map((chat) => (
                       <div key={chat.id}>
                         {chat.sender_id === localStorage.getItem('id') ? (
-                          <div className="d-flex justify-content-end align-items-end mt-4">
-                            <div className="ballon-right me-2">
-                              <p className="p-0 m-0">{chat.chat}</p>
-                              <small
-                                className="text-secondary"
-                                style={{ fontSize: '13px' }}
-                              >
-                                {moment(chat.date).format('LLL')}
-                              </small>
+                          <div>
+                            <div className="d-flex justify-content-end align-items-end mt-4">
+                              <div className="ballon-right me-2">
+                                {
+                                  chat.is_deleted ? <p className="p-0 m-0 text-secondary">This message has been deleted</p> : (
+                                    <>
+                                      <p className="p-0 m-0">{chat.chat}</p>
+                                      <small
+                                        className="text-secondary"
+                                        style={{ fontSize: '13px' }}
+                                      >
+                                        {moment(chat.date).format('LLL')}
+                                      </small>
+                                    </>
+                                  )
+                                }
+                              </div>
+                              {chat.photo ? (
+                                <img
+                                  className="profile-rounded"
+                                  src={`https://drive.google.com/uc?export=view&id=${chat.photo}`}
+                                  alt="Gambar Profile"
+                                />
+                              ) : (
+                                <img
+                                  className="profile-rounded"
+                                  src="https://images227.netlify.app/mernuas/default.jpg"
+                                  alt="Gambar Profile"
+                                />
+                              )}
                             </div>
-                            {chat.photo ? (
-                              <img
-                                className="profile-rounded"
-                                src={`https://drive.google.com/uc?export=view&id=${chat.photo}`}
-                                alt="Gambar Profile"
-                              />
-                            ) : (
-                              <img
-                                className="profile-rounded"
-                                src="https://images227.netlify.app/mernuas/default.jpg"
-                                alt="Gambar Profile"
-                              />
-                            )}
+                            {
+                              !chat.is_deleted && (
+                              <div
+                                className="d-flex justify-content-end w-100"
+                                style={{ marginTop: '-12px' }}
+                              >
+                                <span className="text-primary pointer mt-3 me-2">
+                                  Edit
+                                </span>
+                                <span className="text-danger pointer mt-3" onClick={() => onDeleteMessage(chat)} style={{ marginRight: '65px' }}>
+                                  Delete
+                                </span>
+                              </div>
+                              )
+                            }
                           </div>
                         ) : (
                           <div className="d-flex justify-content-start align-items-end mt-4">

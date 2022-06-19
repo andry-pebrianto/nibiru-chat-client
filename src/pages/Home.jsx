@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import ListUser from '../components/ListUser';
 import Profile from '../components/Profile';
 import Chat from '../components/Chat';
@@ -94,6 +95,27 @@ export default function Home() {
     }, 100);
   };
 
+  const onDeleteMessage = (chat) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const data = {
+          sender: chat.sender_id,
+          receiver: chat.receiver_id,
+          chatId: chat.id,
+        };
+        socketio.emit('delete-message', data);
+      }
+    });
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -109,6 +131,7 @@ export default function Home() {
           message={message}
           setMessage={setMessage}
           onSendMessage={onSendMessage}
+          onDeleteMessage={onDeleteMessage}
         />
       </div>
     </div>
