@@ -13,7 +13,7 @@ export default function Chat({
   return (
     <>
       {activeReceiver ? (
-        <div className="chat-menu col-9 p-0 m-0 d-flex flex-column justify-content-between">
+        <div className="chat-menu col-8 col-md-9 p-0 m-0 d-flex flex-column justify-content-between">
           <div className="chat-menu-header bg-white py-3 px-5">
             <div className="d-flex">
               {detailReceiver.data.photo ? (

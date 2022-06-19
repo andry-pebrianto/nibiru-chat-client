@@ -78,7 +78,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="left-menu col-3 p-4">
+    <div className="left-menu col-4 col-md-3 p-4">
       <Link to="/">
         <div className="color-blue">
           <h3>

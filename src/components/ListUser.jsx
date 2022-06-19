@@ -44,8 +44,8 @@ export default function ListUser({ selectReceiver }) {
   };
 
   return (
-    <div className="left-menu col-3 p-4">
-      <div className="d-flex justify-content-between">
+    <div className="left-menu col-4 col-md-3 p-4">
+      <div className="d-block d-lg-flex justify-content-between">
         <h3 className="color-blue fw-bold">Nibiru Chat</h3>
         <div className="dropdown">
           <div
@@ -114,10 +114,10 @@ export default function ListUser({ selectReceiver }) {
                     {listUser.data.map((user) => (
                       <div key={user.id}>
                         {user.id !== localStorage.getItem('id') && (
-                        <button onClick={() => selectReceiver(user.id)} type="button" className="btn text-dark w-100">
+                        <button onClick={() => selectReceiver(user.id)} type="button" className="btn text-dark w-100 mb-2">
                           <div className="user-item">
-                            <div className="row">
-                              <div className="col-4">
+                            <div className="row w-100">
+                              <div className="col-6 col-md-5 col-lg-3">
                                 {user.photo ? (
                                   <img
                                     className="profile-rounded"
@@ -132,12 +132,12 @@ export default function ListUser({ selectReceiver }) {
                                   />
                                 )}
                               </div>
-                              <div className="col-8 text-start">
-                                <p className="fw-bold p-0 m-0">{user.username.split(' ')[0]}</p>
-                                <p><small className="color-blue">Lorem ipsum dolor.</small></p>
+                              <div className="col-8 col-md-7 col-lg-9 text-start">
+                                <div className="d-flex h-100 align-items-center ms-1">
+                                  <p className="fw-bold p-0 m-0">{user.username.split(' ')[0]}</p>
+                                </div>
                               </div>
                             </div>
-                            <small className="text-end">12.20</small>
                           </div>
                         </button>
                         )}
