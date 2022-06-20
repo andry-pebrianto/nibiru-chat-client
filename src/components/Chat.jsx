@@ -216,13 +216,23 @@ export default function Chat({
                               />
                             )}
                             <div className="ballon-left ms-2">
-                              <p className="p-0 m-0">{chat.chat}</p>
-                              <small
-                                className="text-light"
-                                style={{ fontSize: '13px' }}
-                              >
-                                {moment(chat.date).format('LLL')}
-                              </small>
+                              {
+                                chat.is_deleted ? (
+                                  <p className="p-0 m-0 text-secondary">
+                                    This message has been deleted
+                                  </p>
+                                ) : (
+                                  <>
+                                    <p className="p-0 m-0">{chat.chat}</p>
+                                    <small
+                                      className="text-light"
+                                      style={{ fontSize: '13px' }}
+                                    >
+                                      {moment(chat.date).format('LLL')}
+                                    </small>
+                                  </>
+                                )
+                              }
                             </div>
                           </div>
                         )}

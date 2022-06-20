@@ -7,3 +7,8 @@
   ·
   <a href="https://github.com/andry-pebrianto/nibiruchat-client/issues">Report Bug</a>
 </p>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+Telegram Clone is a chat application made with next js, express js, tailwind css and several other technologies. Telegram Clone has several features such as private chat, contacts, realtime notifications, and others.
