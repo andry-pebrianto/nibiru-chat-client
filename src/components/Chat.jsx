@@ -61,7 +61,7 @@ export default function Chat({
                     onClose={toggleDrawer}
                     direction="right"
                     className="bla bla bla"
-                    size={350}
+                    size={300}
                   >
                     <div className="p-3">
                       <div className="profile mt-4 profile">
