@@ -218,7 +218,7 @@ export default function Chat({
                             <div className="ballon-left ms-2">
                               {
                                 chat.is_deleted ? (
-                                  <p className="p-0 m-0 text-secondary">
+                                  <p className="p-0 m-0 text-light">
                                     This message has been deleted
                                   </p>
                                 ) : (
