@@ -114,7 +114,7 @@ export default function ListUser({ selectReceiver }) {
                     {listUser.data.map((user) => (
                       <div key={user.id}>
                         {user.id !== localStorage.getItem('id') && (
-                        <button onClick={() => selectReceiver(user.id)} type="button" className="btn text-dark w-100 mb-2">
+                        <button onClick={() => selectReceiver(user.id)} type="button" className="btn text-dark w-100 mb-1">
                           <div className="user-item">
                             <div className="row w-100">
                               <div className="col-6 col-md-5 col-lg-3">

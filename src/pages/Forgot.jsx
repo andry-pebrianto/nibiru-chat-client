@@ -2,40 +2,35 @@ import '../assets/styles/auth.css';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from 'react-icons/io';
-import { register } from '../redux/actions/auth';
+import { forgot } from '../redux/actions/auth';
 import { createToast } from '../utils/createToast';
 
-export default function Register() {
+export default function Forgot() {
   const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
-    username: '',
     email: '',
-    password: '',
   });
 
   useEffect(() => {
-    document.title = `${process.env.REACT_APP_APP_NAME} - Register`;
+    document.title = `${process.env.REACT_APP_APP_NAME} - Forgot Password`;
     window.scrollTo(0, 0);
   }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (!form.username || !form.email || !form.password) {
+    if (!form.email) {
       setErrors([{ msg: 'All field required (*) must be filled' }]);
     } else {
       setErrors([]);
       setIsLoading(true);
 
-      const registerStatus = await register(form, setErrors);
-      if (registerStatus) {
-        createToast(
-          'Register Success, Please Activate Your Account Through Link From Email',
-          'success',
-        );
-        navigate('/login');
+      const forgotStatus = await forgot(form, setErrors);
+      if (forgotStatus) {
+        createToast('Send Reset Password Email Success', 'success');
+        navigate('/');
       }
 
       setIsLoading(false);
@@ -51,7 +46,7 @@ export default function Register() {
 
   return (
     <div className="container">
-      <div className="auth mx-auto">
+      <div className="auth mx-auto pb-5">
         <h3 className="color-blue text-center mb-4 position-relative">
           <Link to="/">
             <div className="back-icon color-blue">
@@ -60,9 +55,9 @@ export default function Register() {
               </h3>
             </div>
           </Link>
-          Register
+          Forgot Password
         </h3>
-        <p>Hi, nice to meet you!</p>
+        <p>Don&lsquo;t worry about your password</p>
         {errors.length > 0 && (
           <div className="alert alert-danger mx-0 py-2">
             <ul className="m-0">
@@ -73,20 +68,7 @@ export default function Register() {
           </div>
         )}
         <form onSubmit={submitHandler}>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label text-secondary">
-              <small>* Name</small>
-            </label>
-            <input
-              type="text"
-              className="form-control input-auth"
-              id="username"
-              placeholder="Type your name"
-              onChange={inputChangeHandler}
-              value={form.username}
-            />
-          </div>
-          <div className="mb-3">
+          <div className="mb-4 mt-4">
             <label htmlFor="email" className="form-label text-secondary">
               <small>* Email</small>
             </label>
@@ -97,19 +79,6 @@ export default function Register() {
               placeholder="Type your email address"
               onChange={inputChangeHandler}
               value={form.email}
-            />
-          </div>
-          <div className="mb-5">
-            <label htmlFor="password" className="form-label text-secondary">
-              <small>* Password</small>
-            </label>
-            <input
-              type="password"
-              className="form-control input-auth"
-              id="password"
-              placeholder="Type your ultimate strong password"
-              onChange={inputChangeHandler}
-              value={form.password}
             />
           </div>
           {isLoading ? (
@@ -131,27 +100,10 @@ export default function Register() {
               type="submit"
               className="btn bg-blue w-100 text-white p-3 rounded-pill"
             >
-              Register
+              Send Reset Password Email
             </button>
           )}
         </form>
-        <div className="row title-bottom">
-          <div className="col-4">
-            <div className="line" />
-          </div>
-          <div
-            className="col-4 text-secondary text-center"
-            style={{ marginTop: '-10px' }}
-          >
-            Register With
-          </div>
-          <div className="col-4">
-            <div className="line" />
-          </div>
-        </div>
-        <button type="button" className="btn w-100 btn-google p-3 rounded-pill">
-          Google
-        </button>
       </div>
     </div>
   );

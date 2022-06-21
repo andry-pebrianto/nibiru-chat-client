@@ -48,7 +48,7 @@ export default function Login() {
     <div className="container">
       <div className="auth mx-auto">
         <h3 className="color-blue text-center mb-4">Login</h3>
-        <p>Hi, Welcome back!</p>
+        <p>Hi, welcome back!</p>
         {errors.length > 0 && (
           <div className="alert alert-danger mx-0 py-2">
             <ul className="m-0">
@@ -67,7 +67,7 @@ export default function Login() {
               type="email"
               className="form-control input-auth"
               id="email"
-              placeholder="Email"
+              placeholder="Type your email address"
               onChange={inputChangeHandler}
               value={form.email}
             />
@@ -80,13 +80,13 @@ export default function Login() {
               type="password"
               className="form-control input-auth"
               id="password"
-              placeholder="Password"
+              placeholder="Type your password"
               onChange={inputChangeHandler}
               value={form.password}
             />
           </div>
           <div className="d-flex justify-content-end mb-4">
-            <Link to="/">Forgot Password</Link>
+            <Link to="/forgot">Forgot Password</Link>
           </div>
           {isLoading ? (
             <button
