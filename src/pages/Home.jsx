@@ -96,10 +96,6 @@ export default function Home() {
       id: new Date(),
     };
     setListChat([...listChat, payload]);
-    socketio.emit('chat-history', {
-      sender: localStorage.getItem('id'),
-      receiver: activeReceiver,
-    });
 
     setMessage('');
 
