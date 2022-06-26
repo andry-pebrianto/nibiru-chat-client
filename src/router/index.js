@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import Forgot from '../pages/Forgot';
+// import Forgot from '../pages/Forgot';
 import NotFound from '../pages/NotFound';
 
 // eslint-disable-next-line react/prop-types
@@ -55,7 +55,7 @@ export default function router() {
             )}
           />
         </Route>
-        <Route path="/forgot">
+        {/* <Route path="/forgot">
           <Route
             index
             element={(
@@ -64,7 +64,7 @@ export default function router() {
               </PublicRoute>
             )}
           />
-        </Route>
+        </Route> */}
         <Route path="/">
           <Route
             index
