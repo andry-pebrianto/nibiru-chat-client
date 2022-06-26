@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./readme/logo.png" width="200px" height="200px" />
+  <img src="./readme/logo.svg" width="200px" height="200px" />
 </div>
 <h3 align="center">Nibiru Chat</h3>
 <p align="center">
