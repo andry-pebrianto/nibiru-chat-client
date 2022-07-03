@@ -49,22 +49,22 @@ REACT_APP_API_URL=YOUR_API_URL
 ## Screenshot
 
 ### Login
-<img src="./readme/ss-login.webp" />
+<img src="./readme/1. ss-login.jpg" />
 
 ### Register
-<img src="./readme/ss-register.webp" />
+<img src="./readme/2. ss-register.jpg" />
 
 ### Home
-<img src="./readme/ss-home.webp" />
+<img src="./readme/3. ss-home.jpg" />
 
 ### Edit Profile
-<img src="./readme/ss-edit-profile.webp" />
+<img src="./readme/4. ss-edit-profile.jpg" />
 
 ### Chat
-<img src="./readme/ss-chat.webp" />
+<img src="./readme/5. ss-chat.jpg" />
 
 ### Detail User
-<img src="./readme/ss-detail-user.webp" />
+<img src="./readme/6. ss-detailuser.jpg" />
 
 <!-- RELATED PROJECT -->
 ## Related Project
