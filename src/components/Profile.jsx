@@ -215,7 +215,7 @@ export default function Profile() {
             Phone
           </label>
           <input
-            type="number"
+            type="text"
             className="form-control"
             id="phone"
             value={form.phone}
