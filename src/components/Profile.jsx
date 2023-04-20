@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { IoIosArrowBack } from 'react-icons/io';
-import { FaRegEdit } from 'react-icons/fa';
-import { editProfile, editPhoto, getDetailUser } from '../redux/actions/user';
-import { createToast } from '../utils/createToast';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
+import { FaRegEdit } from "react-icons/fa";
+import { editProfile, editPhoto, getDetailUser } from "../redux/actions/user";
+import { createToast } from "../utils/createToast";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -15,14 +15,14 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [form, setForm] = useState({
-    username: detailUser.data.username ? detailUser.data.username : '',
-    phone: detailUser.data.phone ? detailUser.data.phone : '',
-    bio: detailUser.data.bio ? detailUser.data.bio : '',
+    username: detailUser.data.username ? detailUser.data.username : "",
+    phone: detailUser.data.phone ? detailUser.data.phone : "",
+    bio: detailUser.data.bio ? detailUser.data.bio : "",
   });
   const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
-    const id = localStorage.getItem('id');
+    const id = localStorage.getItem("id");
     dispatch(getDetailUser(id, navigate));
   }, []);
 
@@ -41,15 +41,19 @@ export default function Profile() {
     e.preventDefault();
 
     if (!form.username) {
-      setErrors([{ msg: 'All field required (*) must be filled' }]);
+      setErrors([{ msg: "All field required (*) must be filled" }]);
     } else {
       setErrors([]);
       setIsLoading(true);
 
-      const editProfileStatus = await editProfile(form, setErrors);
+      const payload = { ...form };
+      if (!form.phone) delete payload.phone;
+      if (!form.bio) delete payload.bio;
+
+      const editProfileStatus = await editProfile(payload, setErrors);
       if (editProfileStatus) {
-        createToast('Edit Profile Success', 'success');
-        const id = localStorage.getItem('id');
+        createToast("Edit Profile Success", "success");
+        const id = localStorage.getItem("id");
         dispatch(getDetailUser(id, navigate));
       }
 
@@ -58,11 +62,11 @@ export default function Profile() {
   };
 
   const onSubmitPhoto = async () => {
-    document.getElementById('close').click();
+    document.getElementById("close").click();
 
     const formData = new FormData();
     if (photo) {
-      formData.append('photo', photo);
+      formData.append("photo", photo);
     }
 
     setErrors([]);
@@ -70,8 +74,8 @@ export default function Profile() {
 
     const editPhotoStatus = await editPhoto(formData, setErrors);
     if (editPhotoStatus) {
-      createToast('Edit Photo Success', 'success');
-      const id = localStorage.getItem('id');
+      createToast("Edit Photo Success", "success");
+      const id = localStorage.getItem("id");
       dispatch(getDetailUser(id, navigate, setPhotoIsLoading));
       setPhoto(null);
     }
@@ -88,32 +92,29 @@ export default function Profile() {
       </Link>
       <div className="profile mt-4 profile">
         <div className="position-relative">
-          {
-            photoIsLoading ? (
-              <div className="p-3">
-                <div className="spinner-grow" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
+          {photoIsLoading ? (
+            <div className="p-3">
+              <div className="spinner-grow" role="status">
+                <span className="visually-hidden">Loading...</span>
               </div>
-            )
-              : (
-                <>
-                  {detailUser.data.photo ? (
-                    <img
-                      className="profile-rounded"
-                      src={`https://drive.google.com/uc?export=view&id=${detailUser.data.photo}`}
-                      alt="Gambar Profile"
-                    />
-                  ) : (
-                    <img
-                      className="profile-rounded"
-                      src="https://images227.netlify.app/mernuas/default.jpg"
-                      alt="Gambar Profile"
-                    />
-                  )}
-                </>
-              )
-          }
+            </div>
+          ) : (
+            <>
+              {detailUser.data.photo ? (
+                <img
+                  className="profile-rounded"
+                  src={`https://drive.google.com/uc?export=view&id=${detailUser.data.photo}`}
+                  alt="Gambar Profile"
+                />
+              ) : (
+                <img
+                  className="profile-rounded"
+                  src="https://images227.netlify.app/mernuas/default.jpg"
+                  alt="Gambar Profile"
+                />
+              )}
+            </>
+          )}
           <div
             className="edit-icon position-absolute"
             type="button"
@@ -245,8 +246,7 @@ export default function Profile() {
               className="spinner-border spinner-border-sm"
               role="status"
               aria-hidden="true"
-            />
-            {' '}
+            />{" "}
             Loading...
           </button>
         ) : (
