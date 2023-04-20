@@ -24,7 +24,7 @@ export default function Profile() {
   useEffect(() => {
     const id = localStorage.getItem("id");
     dispatch(getDetailUser(id, navigate));
-  }, []);
+  }, [dispatch, navigate]);
 
   const onChangeHandler = (e) => {
     setForm({

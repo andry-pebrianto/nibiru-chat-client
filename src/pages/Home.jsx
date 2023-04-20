@@ -25,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     document.title = `${process.env.REACT_APP_APP_NAME} - Home`;
     dispatch(getDetailUser(localStorage.getItem("id"), navigate));
-  }, []);
+  }, [dispatch, navigate]);
 
   useEffect(() => {
     setTab("");

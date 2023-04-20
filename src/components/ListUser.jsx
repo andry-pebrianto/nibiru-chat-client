@@ -16,7 +16,7 @@ export default function ListUser({ selectReceiver }) {
 
   useEffect(() => {
     dispatch(getListUser(search, navigate));
-  }, []);
+  }, [dispatch, navigate, search]);
 
   const submitSearch = (e) => {
     e.preventDefault();
