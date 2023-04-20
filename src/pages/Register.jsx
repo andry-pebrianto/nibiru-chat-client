@@ -114,7 +114,7 @@ export default function Register() {
           </div>
           {isLoading ? (
             <button
-              className="btn bg-blue w-100 text-white p-3 rounded-pill"
+              className="btn bg-blue w-100 p-3 rounded-pill"
               disabled
               type="button"
             >
