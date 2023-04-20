@@ -11,7 +11,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Nibiru Chat is a realtime web chat application with features to register, login, forgot password, update profile, send message in real time, edit message, and delete message. This web application is built using ReactJS, ExpressJS, PostgreSQL, and WebSocket.
+Nibiru Chat is a realtime web chat application with features to register, login, update profile, send message in real time, edit message, and delete message. This web application is built using ReactJS, ExpressJS, PostgreSQL, and WebSocket.
 
 ### Technology Used
 - [ReactJS](https://reactjs.org/)
