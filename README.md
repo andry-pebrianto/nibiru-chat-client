@@ -3,7 +3,7 @@
 </div>
 <h3 align="center">Nibiru Chat</h3>
 <p align="center">
-  <a href="https://nibiruchat.netlify.app/">View Demo</a>
+  <a href="https://nibiruchat.andrypebrianto.com">View Demo</a>
   ·
   <a href="https://github.com/andry-pebrianto/nibiruchat-client/issues">Report Bug</a>
 </p>
@@ -36,9 +36,9 @@ Nibiru Chat is a realtime web chat application with features to register, login,
 - Setting .env
 
 ```bash
-REACT_APP_APP_NAME=YOUR_APP_NAME
-REACT_APP_NODE_ENV=YOUR_CURRENT_ENVIRONMENT
-REACT_APP_API_URL=YOUR_API_URL
+REACT_APP_APP_NAME=
+REACT_APP_NODE_ENV=
+REACT_APP_API_URL=
 ```
 
 ### Executing program
@@ -69,8 +69,8 @@ REACT_APP_API_URL=YOUR_API_URL
 <!-- RELATED PROJECT -->
 ## Related Project
 
-- [Nibiru Chat API](https://github.com/andry-pebrianto/nibiruchat-api)
-- [Nibiru Chat Demo](https://nibiruchat.netlify.app/)
+- [Nibiru Chat API](https://github.com/andry-pebrianto/nibiru-chat-server)
+- [Nibiru Chat Demo](https://nibiruchat.andrypebrianto.com)
 
 <!-- CONTACT INFO -->
 ## Contact Info

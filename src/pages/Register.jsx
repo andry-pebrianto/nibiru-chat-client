@@ -135,23 +135,6 @@ export default function Register() {
             </button>
           )}
         </form>
-        <div className="row title-bottom">
-          <div className="col-4">
-            <div className="line" />
-          </div>
-          <div
-            className="col-4 text-secondary text-center"
-            style={{ marginTop: '-10px' }}
-          >
-            Register With
-          </div>
-          <div className="col-4">
-            <div className="line" />
-          </div>
-        </div>
-        <button type="button" className="btn w-100 btn-google p-3 rounded-pill">
-          Google
-        </button>
       </div>
     </div>
   );
