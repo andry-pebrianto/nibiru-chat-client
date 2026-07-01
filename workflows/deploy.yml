@@ -23,7 +23,7 @@ jobs:
 
       - name: Validate Docker Compose
         run: docker compose config --quiet
-
+ 
       - name: Run Deploy Script
         run: docker compose up -d --remove-orphans --build
 
