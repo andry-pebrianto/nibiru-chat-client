@@ -1,0 +1,12 @@
+services:
+  nibiru-chat-client:
+    build:
+      context: .
+      args:
+        - REACT_APP_APP_NAME=${REACT_APP_APP_NAME}
+        - REACT_APP_NODE_ENV=${REACT_APP_NODE_ENV}
+        - REACT_APP_API_URL=${REACT_APP_API_URL}
+    container_name: nibiru-chat-client
+    restart: unless-stopped
+    ports:
+      - "4002:80"

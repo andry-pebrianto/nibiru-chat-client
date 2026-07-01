@@ -1,0 +1,36 @@
+name: Run Github Runners CI/CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v5
+
+      - name: Create .env
+        run: |
+          {
+            echo "REACT_APP_APP_NAME=${{ secrets.REACT_APP_APP_NAME }}"
+            echo "REACT_APP_NODE_ENV=${{ secrets.REACT_APP_NODE_ENV }}"
+            echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}"
+          } > .env
+
+      - name: Validate Docker Compose
+        run: docker compose config --quiet
+
+      - name: Run Deploy Script
+        run: docker compose up -d --remove-orphans --build
+
+      - name: Cleanup .env
+        if: always()
+        run: rm -f .env
+
+      - name: Cleanup unused images
+        if: always()
+        run: docker image prune -f
