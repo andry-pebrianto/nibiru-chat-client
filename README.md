@@ -3,9 +3,9 @@
 </div>
 <h3 align="center">Nibiru Chat</h3>
 <p align="center">
-  <a href="https://nibiruchat.andrypebrianto.com">View Demo</a>
+  <a href="https://nibiru-chat.andrypebrianto.com">View Demo</a>
   ·
-  <a href="https://github.com/andry-pebrianto/nibiruchat-client/issues">Report Bug</a>
+  <a href="https://github.com/andry-pebrianto/nibiru-chat-client/issues">Report Bug</a>
 </p>
 
 <!-- ABOUT THE PROJECT -->
@@ -27,7 +27,7 @@ Nibiru Chat is a realtime web chat application with features to register, login,
 ### Installation
 - Clone This Repository
 
-`git clone https://github.com/andry-pebrianto/nibiruchat-client.git`
+`git clone https://github.com/andry-pebrianto/nibiru-chat-client.git`
 
 - Install Module
 
@@ -70,7 +70,7 @@ REACT_APP_API_URL=
 ## Related Project
 
 - [Nibiru Chat API](https://github.com/andry-pebrianto/nibiru-chat-server)
-- [Nibiru Chat Demo](https://nibiruchat.andrypebrianto.com)
+- [Nibiru Chat Demo](https://nibiru-chat.andrypebrianto.com)
 
 <!-- CONTACT INFO -->
 ## Contact Info
