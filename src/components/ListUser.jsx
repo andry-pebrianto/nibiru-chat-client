@@ -121,7 +121,7 @@ export default function ListUser({ selectReceiver }) {
                                 {user.photo ? (
                                   <img
                                     className="profile-rounded"
-                                    src={`https://drive.google.com/uc?export=view&id=${user.photo}`}
+                                    src={`${user.photo}`}
                                     alt="Gambar Profile"
                                   />
                                 ) : (

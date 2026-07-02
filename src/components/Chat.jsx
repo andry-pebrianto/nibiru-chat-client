@@ -36,7 +36,7 @@ export default function Chat({
                   {detailReceiver.data.photo ? (
                     <img
                       className="profile-rounded pointer"
-                      src={`https://drive.google.com/uc?export=view&id=${detailReceiver.data.photo}`}
+                      src={`${detailReceiver.data.photo}`}
                       alt="Gambar Profile"
                       onClick={toggleDrawer}
                     />
@@ -69,7 +69,7 @@ export default function Chat({
                           {detailReceiver.data.photo ? (
                             <img
                               className="profile-rounded"
-                              src={`https://drive.google.com/uc?export=view&id=${detailReceiver.data.photo}`}
+                              src={`${detailReceiver.data.photo}`}
                               alt="Gambar Profile"
                             />
                           ) : (
@@ -145,7 +145,7 @@ export default function Chat({
                               {chat.photo ? (
                                 <img
                                   className="profile-rounded"
-                                  src={`https://drive.google.com/uc?export=view&id=${chat.photo}`}
+                                  src={`${chat.photo}`}
                                   alt="Gambar Profile"
                                 />
                               ) : (
@@ -205,7 +205,7 @@ export default function Chat({
                             {chat.photo ? (
                               <img
                                 className="profile-rounded"
-                                src={`https://drive.google.com/uc?export=view&id=${chat.photo}`}
+                                src={`${chat.photo}`}
                                 alt="Gambar Profile"
                               />
                             ) : (

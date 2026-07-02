@@ -103,7 +103,7 @@ export default function Profile() {
               {detailUser.data.photo ? (
                 <img
                   className="profile-rounded"
-                  src={`https://drive.google.com/uc?export=view&id=${detailUser.data.photo}`}
+                  src={`${detailUser.data.photo}`}
                   alt="Gambar Profile"
                 />
               ) : (
